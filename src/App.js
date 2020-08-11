@@ -1,26 +1,72 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ProgressIndicator from "./progress-indicator";
 
-function App() {
+const progressSteps = [
+  {
+    label: "About to Start",
+  },
+  {
+    label: "Started",
+  },
+  {
+    label: "In Progress",
+  },
+  {
+    label: "About to Complete",
+  },
+  {
+    label: "Complete",
+  },
+];
+
+const randomColorGenerator = () => {
+  const aa = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  return aa;
+};
+
+const progressStepsCustomColor = [
+  {
+    label: "About to Start",
+    completefill: randomColorGenerator,
+  },
+  {
+    label: "Started",
+    completefill: randomColorGenerator,
+  },
+  {
+    label: "In Progress",
+    completefill: randomColorGenerator,
+  },
+  {
+    label: "About to Complete",
+    completefill: randomColorGenerator,
+  },
+  {
+    label: "Complete",
+    completefill: randomColorGenerator,
+  },
+];
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ProgressIndicator progressSteps={progressSteps} currentStep={0} />
+
+      <ProgressIndicator
+        progressSteps={progressSteps}
+        completefill={"#f0f"}
+        incompleteFill={"#0f0"}
+        currentStep={2}
+      />
+
+      <ProgressIndicator
+        progressSteps={progressStepsCustomColor}
+        currentStep={4}
+      />
+
+      <ProgressIndicator progressSteps={progressSteps} cancelled />
     </div>
   );
-}
+};
 
 export default App;
